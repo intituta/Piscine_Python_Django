@@ -1,0 +1,18 @@
+{% extends 'ex/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Login | {% endblock title %}
+
+{% block content %}
+<div>
+  <h1>Login</h1>
+  <div>
+    <form action="{% url 'ex:login' %}" method="post" class="form">
+      {% csrf_token %} {% bootstrap_form form %}
+      {% buttons submit="OK"%}
+      {% endbuttons %}
+    </form>
+  </div>
+</div>
+{% endblock content %}

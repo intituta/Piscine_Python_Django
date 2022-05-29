@@ -1,0 +1,76 @@
+{% extends 'ex/base.html' %} {% load bootstrap4 %}
+
+{% block title %}{{ object.title }} | {% endblock title %}
+
+{% block content %}
+<div class="container-sm post">
+  <h1 class="post-title fw-500">{{ object.title }}</h1>
+  <div class="d-flex align-items-center mb-4 text-muted author-info">
+    <a
+      class="d-flex align-items-center text-muted text-decoration-none"
+      href="{% url 'ex:profile-detail' object.author.id %}"
+    >
+      {% if object.author.profile_image %}
+      <img
+        class="border rounded-circle mb-0 mr-2"
+        src="{{ object.author.profile_image.url }}"
+        alt="@{{ object.author }}-profile image"
+        width="32"
+        height="32"
+      />
+      {% endif %}
+      <span>{{ object.author }}</span>
+    </a>
+    <span
+      class="d-flex align-items-center ml-2"
+      title="lastedit {{ object.updateDate|date:"d.M.y P" }}"
+      data-toggle="tooltip" data-placement="top"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" role="img" class="bi bi-calendar-day mr-2" viewBox="0 0 16 16">
+        <path d="M4.684 11.523v-2.3h2.261v-.61H4.684V6.801h2.464v-.61H4v5.332h.684zm3.296 0h.676V8.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a1.806 1.806 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98v4.105zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43zm.094 5.093h.672V7.418h-.672v4.105z"/>
+        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+      </svg>
+      {{ object.creationDate|date:"d.M.y P" }}
+    </span>
+    {% if object.author == user or user.is_staff %}
+    <a
+      href="{% url 'ex:post-edit' object.id %}"
+      class="d-flex align-items-center ml-2 btn btn-outline-dark btn-sm" role="button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square mr-2" viewBox="0 0 16 16">
+        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+      </svg>
+      edit
+    </a>
+    <a
+      href="{% url 'ex:post-delete' object.id %}"
+      class="d-flex align-items-center ml-2 btn btn-outline-danger btn-sm" role="button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash mr-2" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+      </svg>
+      delete
+    </a>
+    {% endif %}
+  </div>
+  <div class="post-content mx-2">
+    {{ object.content }}
+  </div>
+	<div>
+    <hr/>
+    <form action="{% url 'ex:comment' object.id %}" method="post" class="form">
+      {% csrf_token %} {% bootstrap_form comment_form %}
+      {% buttons %}
+        {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+      {% endbuttons %}
+    </form>
+		{% if not object.comments.all %}
+			No comments yet
+		{% else %}
+			{% for comment in object.get_comments %}
+			{% include 'ex/pages/post/comment.html' with comment=comment %}
+			{% endfor %}
+		{% endif %}
+	</div>
+</div>
+{% endblock content %}

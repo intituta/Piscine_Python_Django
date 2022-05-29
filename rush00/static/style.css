@@ -1,0 +1,203 @@
+
+body {
+    text-align: center;
+    font-size: 4vw;
+    font-family: fantasy;
+    /*background-color: #c4e2f7;*/
+    background-image: url("background-movies.png");
+}
+
+
+div {
+    padding: 0.5vw;
+}
+
+#console {
+    width: 50vw;
+    border: 5px solid #f82fc7;
+    background-color: #9251f5;
+    margin: 5px auto;
+}
+
+#ecran {
+    height: 51vw;
+    font-size: 3vw;
+    background-color: white;
+}
+
+#info {
+    font-size: 20px;
+    position: absolute;
+    right: 1%;
+    top: 15%;
+    width: 309px;
+    color: white;
+    background-color: #000000;
+    border-radius: 10px;
+}
+
+
+#controles {
+    font-size: 3vw;
+    flex-direction: row;
+    display: grid;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 5%;
+    top: 20%;
+    background-color: black;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.start_select {
+    border: 1px solid gray;
+    border-radius: 30px;
+    padding: 7px 15px 3px 15px;
+    font-size: 2vw;
+    background-color: gray;
+    color: white !important;
+}
+
+#grid {
+    font-size: 1vw;
+}
+
+.square {
+    font-size: 2.5vw;
+    border: 1px solid;
+    padding: 0 10px
+}
+
+a {
+    color: darkblue;
+    text-decoration: none;
+}
+
+a:link {
+    color: inherit;
+}
+
+#game_name {
+    font-size: 8vw;
+}
+
+#welcome_message {
+    padding-top: 6vw;
+}
+
+#moviedex_item {
+    font-size: 1.5vw;
+}
+
+#moviedex_item .name {
+    font-size: 2vw;
+    padding: 2vw;
+}
+
+#moviedex_item div {
+    padding: 2vw;
+}
+
+#moviedex_item img {
+    height: 12vw;
+    width: 8vw;
+}
+
+#moviedex_item_detail {
+    font-size: 1.5vw;
+}
+
+#moviedex_item_detail .name {
+    font-size: 2vw;
+    padding-top: 2vw;
+}
+
+#moviedex_item_detail img {
+    height: 24vw;
+    width: 16vw;
+}
+
+#battle {
+    font-size: 1.5vw;
+}
+
+.info_battle {
+    font-size: 1.5vw;
+}
+
+#affiche {
+    height: 20vw;
+}
+
+#battle .name {
+    font-size: 2vw;
+    padding: 1vw;
+}
+
+#battle div {
+    padding: 1vw;
+}
+
+#battle img {
+    height: 21vw;
+    width: 14vw;
+}
+
+.move-arrows {
+    color: #ffffff !important;
+    font-family: cursive;
+}
+
+.arrows-round {
+    display: flex;
+    background-color: gray;
+    border-radius: 100px;
+    align-items: center;
+    width: 135px;
+    height: 135px;
+    justify-content: center;
+}
+
+.center-up-down {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    height: 170px;
+}
+
+.a-but, .b-but {
+    border-radius: 50px;
+    width: 54px;
+    height: 54px;
+    color: white !important;
+}
+
+.a-but {
+    background-color: #09df23;
+    border: 0.5px solid #09df23;
+}
+
+.b-but {
+    background-color: #f93c3c;
+    border: 1px solid #f93c3c;
+    margin-bottom: 10px;
+}
+
+.mario {
+    width: 40px;
+    height: 36px;
+}
+
+.wall-brick {
+    width: 36px;
+    height: 36px;
+    padding: 0 2px;
+}
+
+.buttons-ab {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}

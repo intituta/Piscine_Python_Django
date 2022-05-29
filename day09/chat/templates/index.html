@@ -1,0 +1,14 @@
+{% extends "chat_base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+	{% if login %}
+		<ul>
+		{% for chat in chats %}
+			<li><a href="main?id={{ chat.id }}">{{ chat.name }}</a></li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<h3 style="text-align: center;color: red;">You must log in to continue...</h3>
+	{% endif %}
+{% endblock %}

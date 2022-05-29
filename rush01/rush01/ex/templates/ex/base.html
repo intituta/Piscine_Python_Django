@@ -1,0 +1,60 @@
+{% load static %} {% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'ex/css/lovelystyle.css' %}" />
+    {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'ex/js/lovely.js' %}"></script>
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+    <style>
+      .comment {
+        border-left: solid;
+        border-left-width: 0.125rem;
+        border-color: #dddddd;
+        padding-left: 10px;
+      }
+      .comment-body {
+        font-size: 1rem;
+      }
+
+      .reply {
+        margin-left: 12px;
+      }
+
+      .reply small {
+        color: #b7b4b4;
+      }
+      .reply small:hover {
+        color: #424242;
+        cursor: pointer;
+      }
+      .dots {
+        height: 4px;
+        width: 4px;
+        margin-bottom: 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+      }
+    </style>
+    <title>{% block title %}{% endblock title %}TheMyLovelyex</title>
+  </head>
+  <body>
+    {% include 'ex/nav.html' %}
+    <div class="container py-2" style="min-height: calc(100vh - 56px - 56px)">
+      {% bootstrap_messages %} {% block content %}
+      <h1>Please Replace here!!</h1>
+      {% endblock content %}
+    </div>
+    {% include 'ex/footer.html' %}
+  </body>
+</html>

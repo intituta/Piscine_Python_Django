@@ -1,0 +1,18 @@
+{% extends 'ex/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Register | {% endblock title %}
+
+{% block content %}
+<div>
+  <h1>Register</h1>
+  <div>
+    <form action="{% url 'ex:register' %}" method="post" class="form">
+      {% csrf_token %} {% bootstrap_form form %}
+      {% buttons submit="OK"%}
+      {% endbuttons %}
+    </form>
+  </div>
+</div>
+{% endblock content %}

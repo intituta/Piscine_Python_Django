@@ -1,0 +1,8 @@
+{% load bootstrap4 %}
+<form action="{{ request.path }}" method="post" class="form" enctype="multipart/form-data">
+  {% csrf_token %} {% bootstrap_form form %}
+  {% buttons %}
+    {% bootstrap_button "Save" button_type="submit" button_class="btn-primary" %}
+    <button class="btn btn-secondary" href="javascript:history.back();" >Cancle</a>
+  {% endbuttons %}
+</form>

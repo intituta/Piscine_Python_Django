@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 def sort_list():
 	d = {
 		'Hendrix':'1942',
@@ -31,5 +32,6 @@ def sort_list():
 		names = sorted(item[1])
 		for name in names:
 			print(name)
+
 if __name__ == '__main__':
 	sort_list()

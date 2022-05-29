@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good Chat</title>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function get_content(CSRF) {
+            $.ajax({
+                method: "POST",
+                url: "{% url 'content' %}",
+                data: $('#login_form').serialize(),
+                success: handleFormSuccess,
+                error: handleFormError,
+                headers: {'X-CSRFToken': CSRF},
+            })
+        }
+
+        function lonout_event(CSRF) {
+            $.ajax({
+                method: "POST",
+                url: "{% url 'logout' %}",
+                success: handleLogoutSuccess,
+                error: handleLogoutError,
+                headers: {'X-CSRFToken': CSRF},
+            })
+        }
+
+        function handleFormSuccess(data, textStatus, jqXHR) {
+            $('#error_content').html("");
+            $('#account_content').html(data);
+        }
+
+        function handleFormError(jqXHR, textStatus, errorThrown) {
+            $('#error_content').html('<div style="margin-left: 50px; color:red;"><b>' +
+            "Error status: " + textStatus + " (" + jqXHR.responseText + ")"
+            + "</b></div>");
+        }
+
+        function handleLogoutSuccess(data) {
+            $('#error_content').html("");
+            $('#account_content').html(data);
+        }
+
+        function handleLogoutError(jqXHR, textStatus, errorThrown) {
+            $('#error_content').html('<div style="margin-left: 50px; color:red;"><b>' +
+            "Error status: " + textStatus + " (" + jqXHR.responseText + ")"
+            + "</b></div>");
+        }
+
+        $(document).ready(function() {
+            window.get_content('{{ csrf_token }}')
+        });
+    </script>
+</head>
+<body>
+    <table style="width: 100%;height: 100%;">
+        <tr><td>
+            <div style="width: 90%;margin-left: auto;margin-right: auto;">
+                <h1 style="text-align: center;">Good Chats</h1>
+                <hr>
+            </div>
+        </td></tr>
+        <tr><td>
+            <div id="error_content">
+            </div>
+        </td></tr>
+        <tr><td>
+            <div id="account_content">
+            </div>
+        </td></tr>
+    </table>
+</body>
+</html>

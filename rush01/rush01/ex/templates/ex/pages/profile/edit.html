@@ -1,0 +1,14 @@
+{% extends 'ex/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Edit ProFile{% endblock title %}
+
+{% block content %}
+<div>
+  <h1>Edit Profile!</h1>
+  <div>
+    {% include 'ex/pages/profile/form.html' %}
+  </div>
+</div>
+{% endblock content %}

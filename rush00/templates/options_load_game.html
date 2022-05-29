@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Load
+{% endblock %}
+
+{% block style %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'ex01/style2.css' %}" /> -->
+{% endblock %}
+
+
+{% block content %}
+<div id="console">
+	{{test}}
+	<div id="ecran">
+		<div>LOAD GAME</div>
+		<div>
+			{% if not slota%}
+				<button style="background-color: pink; color:white; border-radius: 50%; padding: 15px 16px">Slot A - Etat : "Free" </button>
+			{%endif %}
+			{% if slota%}
+				<button style="background-color: pink; color:white; border-radius: 50%; padding: 15px 16px"><a href="/options/load_game?select_one=slota">Slot A - Niveau : {{slot_a}} / 10</a></button>
+
+			{%endif %}
+		</div>
+		<div> <!-- slot B-->
+			{% if not slotb%}
+				<button style="background-color: red; color:white; border-radius: 50%; padding: 15px 16px">Slot B - Etat : "Free" </button>
+			{%endif %}
+
+			{% if slotb%}
+				<button style="background-color: red; color:white; border-radius: 50%; padding: 15px 16px"><a href="/options/load_game?select_one=slotb">Slot B - Niveau : {{slot_b}} / 10</a></button>
+			{%endif %}
+		</div> <!-- end slot B-->
+		<div> <!-- slot C-->
+		{% if not slotc%}
+			<button style="background-color: green; color:white; border-radius: 50%; padding: 15px 16px">Slot C - Etat : "Free" </button>
+		{%endif %}
+		{% if slotc%}
+			<button style="background-color: green; color:white; border-radius: 50%; padding: 15px 16px"><a href="/options/load_game?select_one=slotc">Slot C - Niveau : {{slot_c}} / 10 </a></button>
+		{%endif %}
+		</div> <!-- end slot C-->
+		<div id="info">
+			<div>A - Load</div>
+			<div>B - cancel</div>
+      	</div> <!-- info-->
+	</div> <!-- ecran-->
+	{% include "controles.html" %}
+</div> <!-- console-->
+
+{% endblock %}

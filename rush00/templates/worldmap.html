@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+Moviemon - World Map
+{% endblock %}
+
+{% block style %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'ex01/style2.css' %}" /> -->
+{% endblock %}
+
+
+{% block content %}
+
+<div id="console">
+    <div id="ecran" style="height: 39vw">
+        <div>World Map</div>
+        <div id="grid">
+            {% for x in grid %}
+                {% for y in x %}
+                    {% if y == 'O' %}
+                        <img class="mario" src="{% static 'poke_ball.png' %}" alt="mario">
+                    {% else %}
+                        <img class="wall-brick" src="{% static 'wall_brick.jpeg' %}" alt="wall">
+                    {% endif %}
+                {% endfor %}  
+                 <br>
+            {% endfor %}
+		</div> <!-- grid-->
+        <div id="info">
+			<div id="numballs">You have {{movieballs}}  movieballs</div>
+
+			{% if found == 1 %}
+                <style>
+                </style>
+				<div id="message">You got a movieball!</div>
+			{% elif found == 2 %}
+				<div id="message">You found Moviemon {{name_rating}}!</div>
+                <div>Press A to try to catch it!</div>
+			{% endif %}
+        </div>  <!-- info-->
+    </div> <!-- ecran-->
+	{% include "controles.html" %}
+</div> <!-- console-->
+
+{% endblock %}
+
+

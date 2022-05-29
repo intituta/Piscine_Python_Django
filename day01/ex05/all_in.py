@@ -1,39 +1,51 @@
-#!/usr/bin/env python3
-def normalize_args(arg_str):
-	arg_list = [item for item in arg_str.split(',')]
-	arg_list = [item.lstrip().rstrip() for item in arg_list \
-		if not item.isspace()]
-	return arg_list
-def reverse_dict(initial_dictionary):
-	return dict([[v, k] for k, v in initial_dictionary.items()])
-def all_in(*argv):
-	import sys
-	states = {
-		"Oregon":"OR",
-		"Alabama":"AL",
-		"New Jersey":"NJ",
-		"Colorado":"CO"
-	}
-	capital_cities = {
-		"OR":"Salem",
-		"AL":"Montgomery",
-		"NJ":"Trenton",
-		"CO":"Denver"
-	}
-	if len(sys.argv) != 2:
-		sys.exit(1)
-	argument_str = normalize_args(sys.argv[1])
-	rev_states = reverse_dict(states)
-	rev_cities = reverse_dict(capital_cities)
-	for item in argument_str:
-		if item.title() in states:
-			print("{0} is the capital of {1}".\
-				format(capital_cities[states[item.title()]], item.title()))
-		elif item.title() in rev_cities:
-			print("{0} is the capital of {1}".\
-				format(item.title(), rev_states[rev_cities[item.title()]]))
-		else:
-			print("{0} is neither a capital city nor a state".format(item))
+#!/usr/bin/python3
+
+import sys
+
+def get_item(dict: dict, target: str):
+    for key, item in dict.items():
+        if key.upper() == target.upper():
+            return item
+    return None
+
+def get_key(dict: dict, target: str):
+    for key, item in dict.items():
+        if item.upper() == target.upper():
+            return key
+    return None
+
+def print_state_or_capital_city(str: str):
+    states = {
+        "Oregon": "OR",
+        "Alabama": "AL",
+        "New Jersey": "NJ",
+        "Colorado": "CO"
+    }
+    capital_cities = {
+        "OR": "Salem",
+        "AL": "Montgomery",
+        "NJ": "Trenton",
+        "CO": "Denver"
+    }
+    value = get_item(states, str)
+    key = get_key(capital_cities, str)
+    if value:
+        print(capital_cities.get(value),
+              "is the state of", get_key(states, value))
+    elif key:
+        print(capital_cities.get(key), "is the capital of", get_key(states, key))
+    else:
+        print(str, "is neither a capital city nor a state")
+
+def main():
+    if (len(sys.argv) != 2):
+        return
+    tokens = sys.argv[1].split(",")
+    for token in tokens:
+        token = token.strip()
+        if token == "":
+            continue
+        print_state_or_capital_city(token)
+
 if __name__ == '__main__':
-	import sys
-	all_in(sys.argv)
+    main()

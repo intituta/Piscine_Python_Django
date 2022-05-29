@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 def string_to_dict(line):
 	data_dict = dict()
 	list_name_of_elem__other_data = line.split("=")
@@ -8,6 +9,7 @@ def string_to_dict(line):
 		list_cat__data = data.split(":")
 		data_dict[list_cat__data[0].strip(" ")] = list_cat__data[1].strip(" \n")
 	return data_dict
+
 def read_file():
 	with open("periodic_table.txt", "r") as f:
 		list_of_data_dict = []
@@ -15,6 +17,7 @@ def read_file():
 			data_dict = string_to_dict(line)
 			list_of_data_dict.append(data_dict)
 		return list_of_data_dict
+
 def content(f, list_of_data_dict):
 	prev = 0
 	cur = 0
@@ -37,6 +40,7 @@ def content(f, list_of_data_dict):
 		prev = cur
 	s += "</table>"
 	f.write(s)
+
 def write_to_html(data):
 	with open("periodic_table.html", "w") as f:
 		f.write("""
@@ -53,6 +57,7 @@ def write_to_html(data):
 		content(f, data)
 		f.write("</body>\n")
 		f.write("</html>\n")
+
 def write_to_css():
 	code_to_write ="""
 	body {font-size: 80%;}
@@ -63,13 +68,17 @@ def write_to_css():
   """
 	with open("periodic_table.css", "w") as f:
 		f.write(code_to_write)
+
 def generate_html():
 	data = read_file()
 	write_to_html(data)
+
 def generate_css():
 	write_to_css()
+
 def generate_files():
 	generate_html()
 	generate_css()
+
 if __name__ == '__main__' :
 	generate_files()

@@ -1,0 +1,26 @@
+{% extends 'ex/base.html' %} {% block content %}
+<div>
+  <h1>Hello !</h1>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Author</th>
+          <th scope="col">Title</th>
+        </tr>
+      </head>
+      <tbody>
+        {% for post in object_list %}
+          <tr>
+              <td>{{ post.author }}</td>
+              <td title="{{ post.creationDate|date:"P d.M.y" }}" data-toggle="tooltip" data-placement="top">
+                <a href="{% url 'ex:post-detail' post.id %}">{{ post.title }}</a>
+              </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% include 'ex/pagenation.html' %}
+</div>
+{% endblock content %}

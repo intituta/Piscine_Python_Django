@@ -1,0 +1,30 @@
+{% extends 'ex01/base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'style1.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>Ex01: Django, framework web.</title>
+{% endblock %}
+
+{% block content %}
+{% include 'ex01/nav.html' %}
+<h1>Meet Django</h1>
+<p>Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It's free and open source.</p>
+<ul>
+    <h4>Ridiculously fast.</h4>
+    <li>
+        Django was designed to help developers take applications from concept to completion as quickly as possible.
+    </li>
+    <h4>Reassuringly secure.</h4>
+    <li>
+        Django takes security seriously and helps developers avoid many common security mistakes.
+    </li>
+    <h4>Exceedingly scalable.</h4>
+    <li>
+        Some of the busiest sites on the web leverage Django's ability to quickly and flexibly scale.
+    </li>
+</ul>
+<p>Django was created in the fall of 2003, when the web programmers at the Lawrence Journal-World newspaper, Adrian Holovaty and Simon Willison, began using Python to build applications. Jacob Kaplan-Moss was hired early in Django's development shortly before Simon Willison's internship ended. It was released publicly under a BSD license in July 2005. The framework was named after guitarist Django Reinhardt. Adrian Holovaty is a Romani jazz guitar player and a big fan of Django Reinhardt.</p>
+{% endblock %}

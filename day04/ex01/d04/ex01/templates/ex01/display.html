@@ -1,0 +1,15 @@
+{% extends 'ex01/base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'style1.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>Ex01: Display process of a static page.</title>
+{% endblock %}
+
+{% block content %}
+{% include 'ex01/nav.html' %}
+<p>When a user visits your web application by typing a URL in their browser, such as https://checkseats.com/about, Django matches the URL pattern to a view. The view determines the content for the page and collects data from a model (which is associated with a database table). The template provides the layout & styling with the end result being an HTML file sent back to the user in an HTTP response. The flow looks something like this:</p>
+<p>URL -> View -> Model (optional) -> Template</p>
+{% endblock %}

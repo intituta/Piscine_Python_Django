@@ -1,0 +1,11 @@
+{% load bootstrap3 %}
+<h3 style="text-align: center;">log in to continue...</h3>
+<div style="margin-left: 50px;width: 300px;">
+	<form id='login_form' method='POST' action='.' url="{% url 'content' %}">
+			{% csrf_token %}
+			{% bootstrap_form form %}
+	</form>
+	{% buttons %}
+		<button class="btn btn-primary" id ="login_btn" onclick="get_content('{{ csrf_token }}');" type='submit'>Log in</button>
+	{% endbuttons %}
+</div>

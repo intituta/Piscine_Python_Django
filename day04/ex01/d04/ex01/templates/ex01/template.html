@@ -1,0 +1,38 @@
+{% extends 'ex01/base.html' %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'style2.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>Ex01: Template engine.</title>
+{% endblock %}
+
+{% block content %}
+{% include 'ex01/nav.html' %}
+<h1>Templates</h1>
+<p>A template is a text file. It can generate any text-based format (HTML, XML, CSV, etc.). A template contains variables, which get replaced with values when the template is evaluated, and tags, which control the logic of the template. Below is a minimal template that illustrates a few basics. Each element will be explained later in this document.</p>
+<h4>Variables</h4>
+<p>Variables look like this: { { variable } }. When the template engine encounters a variable, it evaluates that variable and replaces it with the result. Variable names consist of any combination of alphanumeric characters and the underscore ("_") but may not start with an underscore, and may not be a number. The dot (".") also appears in variable sections, although that has a special meaning, as indicated below. Importantly, you cannot have spaces or punctuation characters in variable names.</p>
+<h4>For</h4>
+<p>Loop over each item in an array. For example, to display a list of athletes provided in athlete_list:</p>
+<p><ul>
+{ % for athlete in athlete_list % }
+    <li style="list-style-type: none;">{ { athlete.name } }</li>
+{ % endfor % }
+</ul></p>
+<h4>If</h4>
+<p>You can also use filters and various operators in the if tag:</p>
+<p><ul>{ % if athlete_list|length > 1 % }
+    <li style="list-style-type: none;">Team: { % for athlete in athlete_list % } ... { % endfor % }</li>
+{ % else % }
+    <li style="list-style-type: none;">Athlete: { { athlete_list.0.name } }</li>
+{ % endif % }
+</ul></p>
+<h4>Template inheritance</h4>
+<p>The most powerful – and thus the most complex – part of Django’s template engine is template inheritance. Template inheritance allows you to build a base “skeleton” template that contains all the common elements of your site and defines blocks that child templates can override.</p>
+<p>&lt;title&gt;{ % block title % }My amazing site{ % endblock % }&lt;/title&gt;</p>
+<p>This template, which we’ll call base.html, defines an HTML skeleton document that you might use for a two-column page. It’s the job of “child” templates to fill the empty blocks with content. In this example, the block tag defines three blocks that child templates can fill in. All the block tag does is to tell the template engine that a child template may override those portions of the template. A child template might look like this:</p>
+<p>{ % extends "base.html" % }</p>
+<p>{ % block title % }My amazing blog{ % endblock % }</p>
+{% endblock %}

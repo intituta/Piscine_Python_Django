@@ -1,0 +1,41 @@
+{% extends "chat_base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+	<h3 style="text-align: center;">Welcom to {{ chat.name }}</h3>
+	<div id="chat_content" style="border: 1px solid #313131;overflow-y: scroll;height: 500px;margin-left: 20px;margin-right: 20px;  display: flex;flex-direction: column-reverse;flex-wrap: nowrap;">
+	</div>
+	<div style="margin-left: 20px;margin-top: 10px; margin-right: 20px;">
+		<input type="text" style="width: 100%;" id="input_data">
+	<div>
+	<button class="btn btn-primary" type='submit' onclick="send_to_server()" style="width: 300px;margin-top: 10px;">Send</button>
+	<script>
+		var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/{{ chat.id }}/{{ user.id }}/');
+		function send_to_server(){
+			chatSocket.send($('#input_data').val());
+			$('#input_data').val('')
+		}
+
+		chatSocket.onmessage = function(e) {
+			data = JSON.parse(e.data)
+			if (data.type == 1) {
+				content_html = $('#chat_content').html()			
+				$('#chat_content').html('<p style="margin-left: 10px;margin-right: 10px;"><span style="font-style:italic;color:grey">' + data.name + '</span> (' 
+					+ data.date.substring(0, 16) + '): ' + data.message + '</p>' + content_html)
+			}
+			if (data.type == 2) {
+				content_html = $('#chat_content').html()			
+				$('#chat_content').html('<p style="margin-left: 10px;margin-right: 10px;"><span style="font-style:italic;color:grey">' + data.name + '</span> ' 
+					+ '<span style="color:green">connect to chat</span>' + '</p>' + content_html)
+			}
+			if (data.type == 3) {
+				content_html = $('#chat_content').html()			
+				$('#chat_content').html('<p style="margin-left: 10px;margin-right: 10px;"><span style="font-style:italic;color:grey">' + data.name + '</span> ' 
+					+ '<span style="color:red">disconnect chat</span>' + '</p>' + content_html)
+			}
+	    };
+
+	</script>
+{% endblock %}
